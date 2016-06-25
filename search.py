@@ -13,9 +13,13 @@ def usage():
         eg. douban_book -s 8 -q docker -l 100
         """
 def print_books(books):
+    if len(books) == 0:
+        print 'None results'
+        sys.exit(0)
     for book in books:
         print 'Name: '+book['title']
-        print 'Author: '+reduce(lambda x,y:x+','+y,book['author'])
+        if book['author']:
+            print 'Author: '+reduce(lambda x,y:x+','+y,book['author'])
         print 'Average Score: '+book['rating']['average']
         print 'Price: '+book['price']
         print '\n'
